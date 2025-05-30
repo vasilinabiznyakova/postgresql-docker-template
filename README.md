@@ -6,6 +6,7 @@ This project sets up a **PostgreSQL** instance with automatic database initializ
 
 ## 📚 Table of Contents
 
+* [📦 Database Schema](#-database-schema)
 * [📦 Project Structure](#-project-structure)
 * [⚙️ Environment Configuration](#️-environment-configuration)
 * [🚀 How to Start the Database](#-how-to-start-the-database)
@@ -13,6 +14,16 @@ This project sets up a **PostgreSQL** instance with automatic database initializ
 * [⚠️ Important Notes](#️-important-notes)
 * [🔍 Verifying the Database](#-verifying-the-database)
 * [🐞 Troubleshooting](#-troubleshooting)
+
+---
+
+## 📊 Database Schema
+
+Here is the database structure for this project:
+
+[![Database Schema](./db-diagram/schema.png)](https://dbdiagram.io/d/Pools_statistics-68381800c07db17e77b0a543)
+
+> **View interactive diagram**: [dbdiagram.io Link](https://dbdiagram.io/d/Pools_statistics-68381800c07db17e77b0a543)
 
 ---
 
