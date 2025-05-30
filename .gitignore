@@ -1,0 +1,42 @@
+# Ignore Docker-related data
+data/
+*.pid
+
+# Ignore environment files (credentials etc.)
+.env
+.env.*
+
+# Ignore certificates, but keep certs folder
+certs/*
+!certs/.gitkeep
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore editor files
+.vscode/
+.idea/
+*.code-workspace
+*.iml
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore node_modules if frontend is added
+node_modules/
+
+# Ignore build and dist artifacts but keep folders
+build/*
+!build/.gitkeep
+
+dist/*
+!dist/.gitkeep

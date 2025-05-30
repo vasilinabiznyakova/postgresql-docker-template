@@ -1,0 +1,25 @@
+# Ignore everything
+*
+
+# But include these
+!init.sql
+!docker-compose.yml
+!certs/
+!entrypoint.sh
+
+# Ignore environment files (secrets)
+.env
+.env.*
+
+# Ignore local database data and secrets
+data/
+certs/*.key
+certs/*.crt
+
+# Ignore system files
+**/__pycache__/
+**/*.pyc
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
