@@ -1,0 +1,6 @@
+# Set shell scripts to always use LF (Unix-style) endings
+*.sh text eol=lf
+*.sql text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
