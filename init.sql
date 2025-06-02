@@ -27,8 +27,27 @@ CREATE TABLE pools (
   yield_over_tvl NUMERIC,              -- Yield relative to TVL
   token_balance_a NUMERIC,             -- Current token A balance 🟡❓ Possibly unused
   token_balance_b NUMERIC,             -- Current token B balance 🟡❓ Possibly unused
-  trade_enable_timestamp TIMESTAMP     -- When trading was enabled
+  trade_enable_timestamp TIMESTAMP,     -- When trading was enabled
+
+  
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+
+-- Create a trigger to update the updated_at field
+CREATE OR REPLACE FUNCTION set_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_set_updated_at
+BEFORE UPDATE ON pools
+FOR EACH ROW
+EXECUTE FUNCTION set_updated_at();
 
 -- Create table for periods (timeframes)
 CREATE TABLE periods (
@@ -59,8 +78,8 @@ CREATE TABLE rewards (
   mint VARCHAR,                                        -- Reward token mint
   vault VARCHAR,                                       -- Reward token vault
   growth_global_x64 VARCHAR,                           -- Global reward growth in X64
-  active BOOLEAN,                                      -- Reward emission active
-  emissions_per_second NUMERIC                         -- Emissions per second 🟡❓ Possibly unused
+  active BOOLEAN                                      -- Reward emission active
+  -- emissions_per_second NUMERIC                         -- Emissions per second 🟡❓ Possibly unused
   -- emissions_per_second_x64 VARCHAR -- 🟡❓ Possibly unused, commented for now
 );
 
