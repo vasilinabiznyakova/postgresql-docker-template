@@ -22,12 +22,12 @@ CREATE TABLE pools (
   token_mint_b VARCHAR REFERENCES tokens(address), -- Token B mint
   token_vault_b VARCHAR,               -- Vault address for token B 🟡❓ Possibly unused
   has_warning BOOLEAN,                 -- Has pool warnings
-  price NUMERIC,                       -- Current pool price 🟡❓ Possibly unused
-  tvl_usdc NUMERIC,                    -- TVL in USDC
-  yield_over_tvl NUMERIC,              -- Yield relative to TVL
-  token_balance_a NUMERIC,             -- Current token A balance 🟡❓ Possibly unused
-  token_balance_b NUMERIC,             -- Current token B balance 🟡❓ Possibly unused
-  trade_enable_timestamp TIMESTAMP,     -- When trading was enabled
+  price VARCHAR,                       -- Current pool price 🟡❓ Possibly unused
+  tvl_usdc VARCHAR,                    -- TVL in USDC
+  yield_over_tvl VARCHAR,              -- Yield relative to TVL
+  token_balance_a VARCHAR,             -- Current token A balance 🟡❓ Possibly unused
+  token_balance_b VARCHAR,             -- Current token B balance 🟡❓ Possibly unused
+  trade_enable_timestamp VARCHAR,     -- When trading was enabled
 
   
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -65,10 +65,11 @@ CREATE TABLE stats (
   id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, -- Auto-incremented ID
   pool_address VARCHAR REFERENCES pools(address),      -- Pool address
   period VARCHAR REFERENCES periods(code),             -- Statistics period ('24h', '7d', etc.)
-  volume NUMERIC,                                      -- Trading volume
-  fees NUMERIC,                                        -- Collected fees
-  rewards NUMERIC,                                     -- Rewards
-  yield_over_tvl NUMERIC                               -- Yield relative to TVL
+  volume VARCHAR,                                      -- Trading volume
+  fees VARCHAR,                                        -- Collected fees
+  rewards VARCHAR,                                     -- Rewards
+  yield_over_tvl VARCHAR,
+  UNIQUE (pool_address, period)                               -- Yield relative to TVL
 );
 
 -- Create table for pool rewards
@@ -78,7 +79,8 @@ CREATE TABLE rewards (
   mint VARCHAR,                                        -- Reward token mint
   vault VARCHAR,                                       -- Reward token vault
   growth_global_x64 VARCHAR,                           -- Global reward growth in X64
-  active BOOLEAN                                      -- Reward emission active
+  active BOOLEAN,
+  UNIQUE (pool_address, mint)                                      -- Reward emission active
   -- emissions_per_second NUMERIC                         -- Emissions per second 🟡❓ Possibly unused
   -- emissions_per_second_x64 VARCHAR -- 🟡❓ Possibly unused, commented for now
 );
